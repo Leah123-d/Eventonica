@@ -1,7 +1,7 @@
 //Updated API endpoints to use SQL queries
 import express from 'express';
 import { v4 as uuidv4 } from 'uuid';
-import server from '../server.js'
+import dbConnection from '../db-connection.js'
 
 const router = express.Router();
 
@@ -31,7 +31,7 @@ router.post('/events', async (req,res) => {
 //to read the events
 router.get('/events', async (req,res) => {
     try{
-        const result = await server.query('SELECT * FROM events;');
+        const result = await dbConnection.query('SELECT * FROM events;');
         res.json(result.rows);
     } catch (error){
         console.error('error fetching events data: ', error);
