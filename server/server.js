@@ -2,6 +2,11 @@ import express from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 
+//TO-DO:
+//need to get my data from my database displaying when the url /events is called
+//need to figure out how I want to handle routes 
+//test if CRUD operations are function from the backend then see how to connect that to the front end
+
 dotenv.config();
 
 const app = express();
@@ -15,6 +20,8 @@ const app = express();
 
 
 app.get('/', (req,res) => res.send("Hello! This is the homepage!")); //test connection to the home page
+
+
 
 
 

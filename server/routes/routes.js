@@ -6,67 +6,69 @@ import server from '../server.js'
 const router = express.Router();
 
 //send some data to the server for the animals to be created 
+//database is called eventonica
+//table is called events
 
-router.post('/', async (req,res) => {
+router.post('/events', async (req,res) => {
     try{
     console.log('POST ROUTE REACHED');
-    const { id, common_name, scientific_name, lifespan, habitat, diet } = req.body;
+    const { id, title, details, venue, extras } = req.body;
 
     const result = await server.query(
-        'INSERT INTO animales (id, common_name, scientific_name, lifespan, habitat, diet) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-        [uuidv4(), common_name, scientific_name, lifespan, habitat, diet]
+        'INSERT INTO events (id, title, details, venue, extras) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+        [uuidv4(), title, details, venue, extras]
     );
     console.log(result);
     //using parameterized quries to prevent SQL injection
 
-    res.send(`Animal ${result.rows[0].common_name} was added to the database`)
+    res.send(`Event ${result.rows[0].common_name} was added to the database`)
     } catch (error) {
-        console.error('Error creating new animal: ', error);
+        console.error('Error creating new event: ', error);
     }
 
 });
 
-//to read the animals
-router.get('/', async (req,res) => {
+//to read the events
+router.get('/events', async (req,res) => {
     try{
-        const result = await server.query('SELECT * FROM animales;');
+        const result = await server.query('SELECT * FROM events;');
         res.json(result.rows);
     } catch (error){
-        console.error('error fetching animales data: ', error);
+        console.error('error fetching events data: ', error);
     }
 });
 
-// to find a specific animal by id 
+// to find a specific event by id 
 router.get('/:id', async  (req, res) => {
     try{
     const { id } = req.params; 
     
-    const result = await server.query(`SELECT * FROM animales WHERE id = $1`, [id]);
+    const result = await server.query(`SELECT * FROM events WHERE id = $1`, [id]);
 
     if(result.rows.length === 0){
-        return res.send('Animal not found');
+        return res.send('event not found');
     }
 
     res.json(result.rows[0]);
     } catch (error){
-        console.error('No animal found', error);
+        console.error('No event found', error);
     }
 });
 
-//delete an animal
+//delete an event
 router.delete('/:id', async (req, res) => {
     try{
     const { id } = req.params;
 
-    const result = await server.query('DELETE FROM animales WHERE id = $1 RETURNING *', [id]);
+    const result = await server.query('DELETE FROM events WHERE id = $1 RETURNING *', [id]);
 
     if(result.rowCount === 0){
-        return res.send('Animal not found');
+        return res.send('Event not found');
     }
 
-    res.send(`Animal with the ID: ${id} has been deleted`);
+    res.send(`Event with the ID: ${id} has been deleted`);
     } catch (error){
-        console.error(`Could not locate animal with id: ${id}: `, error);
+        console.error(`Could not locate event with id: ${id}: `, error);
     }
 })
 
@@ -91,21 +93,21 @@ router.patch('/:id', async (req, res) => {
         const { id } = req.params;
         
         //get properties to be updated
-        const  {common_name, scientific_name, lifespan, habitat, diet } = req.body; //take everything from the req.body
+        const  {title, details, venue, extras} = req.body; //take everything from the req.body
 
         const result = await server.query(
-            'UPDATE animales SET common_name = $1, scientific_name = $2, lifespan = $3, habitat = $4, diet = $5 WHERE id = $6 RETURNING *',
-            [common_name, scientific_name, lifespan, habitat, diet, id]);
+            'UPDATE events SET title = $1, details = $2, venue = $3, extras = $4 WHERE id = $6 RETURNING *',
+            [title, details, venue, extras, id]);
 
         if(result.rowCount === 0){
-            return res.send('Animal not found');
+            return res.send('Event not found');
         }
 
 
-        res.send(`Animal with ${id} has been updated`)
+        res.send(`Event with ${id} has been updated`)
         }
         catch (error){
-            console.error('Could not find animal matching id: ', error);
+            console.error('Could not find event matching id: ', error);
 
         }
     });
