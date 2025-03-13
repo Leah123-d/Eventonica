@@ -6,9 +6,10 @@ function HomePage(){
         <thead>
           <tr>
           <th></th>
-          <th>Name</th>
-          <th>Job</th>
-          <th>Favorite Color</th>
+          <th>Event Name</th>
+          <th>Description</th>
+          <th>Venue</th>
+          <th>Additional details</th>
           </tr>
         </thead>
         <tbody>
