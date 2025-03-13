@@ -9,6 +9,11 @@ import HomePage from './components/HomePage'
 //we will send quary parameters to the back end to display the information to the front end 
 //also, default we will display all the events already in our DB
 
+//information from existing events will be sent to the front end 
+//a button will be needed to edit the event 
+//a button will be needed to delete the event 
+//the submit on the form will need to post to the database so that information will send to the backend 
+
 function App() {
 
   const checkConnection = async (e) => {
@@ -25,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>App setting up</h1>
+      
       {/* <NavBar /> */}
       <HomePage />
       {/* <CreateEvents /> */}

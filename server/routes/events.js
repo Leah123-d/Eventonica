@@ -1,27 +1,36 @@
 //Updated API endpoints to use SQL queries
 import express from 'express';
-import { v4 as uuidv4 } from 'uuid';
 import dbConnection from '../db-connection.js'
 
 const router = express.Router();
 
-//send some data to the server for the animals to be created 
 //database is called eventonica
 //table is called events
 
-router.post('/events', async (req,res) => {
+//example event to add 
+//will need to think how id can be added if the user is not adding this? 
+// {
+//     "id": 6,
+//     "title": "Oakland Max Out",
+//     "details": "Local weightlifting competition",
+//     "venue": "Max's Gym",
+//     "extras": "come prepared with all your gear and starting totals"
+// }
+
+//route to create events 
+router.post('/', async (req,res) => {
     try{
     console.log('POST ROUTE REACHED');
     const { id, title, details, venue, extras } = req.body;
 
-    const result = await server.query(
-        'INSERT INTO events (id, title, details, venue, extras) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-        [uuidv4(), title, details, venue, extras]
+    const result = await dbConnection.query(
+        'INSERT INTO events (id, title, details, venue, extras) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+        [id, title, details, venue, extras]
     );
     console.log(result);
     //using parameterized quries to prevent SQL injection
 
-    res.send(`Event ${result.rows[0].common_name} was added to the database`)
+    res.send(`Event ${result.rows[0].title} was added to the database`)
     } catch (error) {
         console.error('Error creating new event: ', error);
     }
@@ -29,7 +38,7 @@ router.post('/events', async (req,res) => {
 });
 
 //to read the events
-router.get('/events', async (req,res) => {
+router.get('/', async (req,res) => {
     try{
         const result = await dbConnection.query('SELECT * FROM events;');
         res.json(result.rows);
@@ -43,7 +52,7 @@ router.get('/:id', async  (req, res) => {
     try{
     const { id } = req.params; 
     
-    const result = await server.query(`SELECT * FROM events WHERE id = $1`, [id]);
+    const result = await dbConnection.query(`SELECT * FROM events WHERE id = $1`, [id]);
 
     if(result.rows.length === 0){
         return res.send('event not found');
@@ -60,7 +69,7 @@ router.delete('/:id', async (req, res) => {
     try{
     const { id } = req.params;
 
-    const result = await server.query('DELETE FROM events WHERE id = $1 RETURNING *', [id]);
+    const result = await dbConnection.query('DELETE FROM events WHERE id = $1 RETURNING *', [id]);
 
     if(result.rowCount === 0){
         return res.send('Event not found');
@@ -95,15 +104,13 @@ router.patch('/:id', async (req, res) => {
         //get properties to be updated
         const  {title, details, venue, extras} = req.body; //take everything from the req.body
 
-        const result = await server.query(
-            'UPDATE events SET title = $1, details = $2, venue = $3, extras = $4 WHERE id = $6 RETURNING *',
+        const result = await dbConnection.query(
+            'UPDATE events SET title = $1, details = $2, venue = $3, extras = $4 WHERE id = $5 RETURNING *',
             [title, details, venue, extras, id]);
 
         if(result.rowCount === 0){
             return res.send('Event not found');
         }
-
-
         res.send(`Event with ${id} has been updated`)
         }
         catch (error){
