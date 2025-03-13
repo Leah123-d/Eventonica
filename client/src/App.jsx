@@ -28,18 +28,31 @@ function App() {
   const[currentEvents, setCurrentEvents] = useState([]);
 
   //We are fetching the data that is at the url /api which at the backend is connection to the eventonica databse
-  useEffect(() => {
-    const fetchCurrentEvents = async () => { 
+  //there might be a problem with async in useEffect
+  const fetchCurrentEvents = async () => { 
     try {
       const res = await fetch('/events');
       const data = await res.json();
       console.log("Current Events: ", data)
-      setCurrentEvents(data);
+      return data;
     } catch(error) {
       console.error('Error:', error);
     }
   };
-  fetchCurrentEvents(); }, []);
+  fetchCurrentEvents();
+
+
+  useEffect(() => {
+    const data = async () => {
+      const res = await fetchCurrentEvents();
+      setCurrentEvents(res);
+    };
+    data();
+  }, []);
+  
+
+ 
+   
   
   const handleChange = (e) => {
     setNewEvent ({

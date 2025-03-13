@@ -1,6 +1,8 @@
+import { TfiTrash } from "react-icons/tfi";
+
 function HomePage({currentEvents}){
-  //I think I can build usereducer on this page when events are edited
-  console.log({currentEvents});
+
+  // console.log({currentEvents});
   
   return(
     <div className="overflow-x-auto">
@@ -23,6 +25,7 @@ function HomePage({currentEvents}){
           <td>{currentEvents[0].details}</td>
           <td>{currentEvents[0].venue}</td>
           <td>{currentEvents[0].extras}</td>
+          <TfiTrash />
           </tr>
           {/* row 2 */}
           <tr>
