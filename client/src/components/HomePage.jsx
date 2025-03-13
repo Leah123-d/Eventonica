@@ -1,4 +1,7 @@
-function HomePage(){
+function HomePage({currentEvents}){
+  //I think I can build usereducer on this page when events are edited
+  console.log({currentEvents});
+  
   return(
     <div className="overflow-x-auto">
       <table className="table">
@@ -15,45 +18,51 @@ function HomePage(){
         <tbody>
           {/* row 1 */}
           <tr>
-          <th>1</th>
-          <td>Cy Ganderton</td>
-          <td>Quality Control Specialist</td>
-          <td>Blue</td>
+          <th>{currentEvents[0].id}</th>
+          <td>{currentEvents[0].title}</td>
+          <td>{currentEvents[0].details}</td>
+          <td>{currentEvents[0].venue}</td>
+          <td>{currentEvents[0].extras}</td>
           </tr>
           {/* row 2 */}
           <tr>
-          <th>2</th>
-          <td>Hart Hagerty</td>
-          <td>Desktop Support Technician</td>
-          <td>Purple</td>
+          <th>{currentEvents[1].id}</th>
+          <td>{currentEvents[1].title}</td>
+          <td>{currentEvents[1].details}</td>
+          <td>{currentEvents[1].venue}</td>
+          <td>{currentEvents[1].extras}</td>
           </tr>
           {/* row 3 */}
           <tr>
-          <th>3</th>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Red</td>
+          <th>{currentEvents[2].id}</th>
+          <td>{currentEvents[2].title}</td>
+          <td>{currentEvents[2].details}</td>
+          <td>{currentEvents[2].venue}</td>
+          <td>{currentEvents[2].extras}</td>
           </tr>
           {/* row 4 */}
           <tr>
-          <th>4</th>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Red</td>
+          <th>{currentEvents[3].id}</th>
+          <td>{currentEvents[3].title}</td>
+          <td>{currentEvents[3].details}</td>
+          <td>{currentEvents[3].venue}</td>
+          <td>{currentEvents[3].extras}</td>
           </tr>
           {/* row 5 */}
           <tr>
-          <th>5</th>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Red</td>
+          <th>{currentEvents[4].id}</th>
+          <td>{currentEvents[4].title}</td>
+          <td>{currentEvents[4].details}</td>
+          <td>{currentEvents[4].venue}</td>
+          <td>{currentEvents[4].extras}</td>
           </tr>
           {/* row 5 */}
           <tr>
-          <th>6</th>
-          <td>Brice Swyre</td>
-          <td>Tax Accountant</td>
-          <td>Red</td>
+          <th>{currentEvents[5].id}</th>
+          <td>{currentEvents[5].title}</td>
+          <td>{currentEvents[5].details}</td>
+          <td>{currentEvents[5].venue}</td>
+          <td>{currentEvents[5].extras}</td>
           </tr>
         </tbody>
       </table>
