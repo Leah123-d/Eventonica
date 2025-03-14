@@ -4,20 +4,26 @@ import HomePage from './components/HomePage'
 import NavBar from './components/NavBar'
 import CreateEvents from './components/CreateEvents'
 
-//TO-DO: 
-//1.need a function to add an event 
-  //when a button is clicked it will run the post query from the backend to create the event based on its id
-  //we will be passing the event from the component to the parent in a call back function
-
-//overall, can we have a useReducer hook handle both states? 
-//then we would send a fetch to trigger the query? Then if the response is successful we would a send message 
-//to the front end. 
-
-//a button will be needed to edit the event 
-//a button will be needed to delete the event 
-//the submit on the form will need to post to the database so that information will send to the backend 
-
 function App() {
+
+  const initialState {
+    loading: ture,
+    searching: false,
+    deleteConfirmation: "",
+  }
+
+
+  function reducer(state,action):{
+    switch (action.type){
+      case "SET_LOADING":
+        return {...state, loading: action.payload };
+      case "SET_SEARCHING":
+        return {...state, searching: action.payload };
+      case "SET_DELETE_CONFIRMATION":
+      return {...state, deleteConfirmation: action.payload };
+      
+    }
+  }
   const [newEvent, setNewEvent] = useState(
     {
       title: "",
@@ -26,14 +32,15 @@ function App() {
       extras:"",
     });
   
-  const [errorHandle, setErrorHandle] = useState(false);
-  const [loading, setLoading] = useState(true);
+  // const [errorHandle, setErrorHandle] = useState(false);
   const [currentEvents, setCurrentEvents] = useState([]);
-  const [deleteConfirmation, setDeleteConfirmation] = useState("");
   const [addEvent, setAddEvent] = useState(false);
   const [filterText, setFilterText] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
-  const [seraching, setSearching] = useState(false)
+
+  // const [loading, setLoading] = useState(true);
+  // const [seraching, setSearching] = useState(false)
+  // const [deleteConfirmation, setDeleteConfirmation] = useState("");
 
   const handleFilterChange = (e) => {
     setFilterText(e.target.value); //as the user types we will update the filterText state
@@ -166,13 +173,17 @@ function App() {
             <div>
               {seraching && filteredEvents.length === 0 && <p>no matches found</p>}
               {filteredEvents.length > 0 && (
+                <div>
+                <h2>Search Results:</h2>
                 <ul>
                   {filteredEvents.map((event, index) => (
-                    <li key={index}>
-                      {event.title} : {event.details}
-                    </li>
+                    <p>
+                      
+                      <strong>{event.title} : {event.details}</strong>
+                    </p>
                   ))}
                 </ul>
+                </div>
               )} 
             </div>
 
