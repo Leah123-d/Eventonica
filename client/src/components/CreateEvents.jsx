@@ -1,5 +1,6 @@
 function CreateEvents({ newEvent, handleChange, createEvent }){
 
+  // thing to consider: I am seeing that the event is added to your backend, however, user does need to press refresh to see it on the front end
   return(
     <div className="card w-96 bg-base-100 shadow-sm">
       <div className="card-body">
