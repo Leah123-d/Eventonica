@@ -62,3 +62,5 @@ For Frontend
 
 
 ## Project Preview: 
+![eventonica](https://github.com/user-attachments/assets/be9f07c8-6c0a-4d26-8a9f-e46d6b5b144e)
+
