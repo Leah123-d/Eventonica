@@ -31,6 +31,43 @@ function App() {
   const [currentEvents, setCurrentEvents] = useState([]);
   const [deleteConfirmation, setDeleteConfirmation] = useState("");
   const [addEvent, setAddEvent] = useState(false);
+  const [filterText, setFilterText] = useState("");
+  const [filteredEvents, setFilteredEvents] = useState([]);
+  const [seraching, setSearching] = useState(false)
+
+  const handleFilterChange = (e) => {
+    setFilterText(e.target.value); //as the user types we will update the filterText state
+  }
+
+//we will set up conditional redering to show the result
+  const filterSubmit = (e) => {
+    e.preventDefault();
+    setSearching(true);
+
+    const searchValues = filterText.trim().toLowerCase();
+    if(!searchValues){
+      window.alert("please enter a serach value");
+      return
+    }
+
+    if(!currentEvents || Object.keys(currentEvents).length === 0){
+      console.log("no searchable events found");
+        return;
+    }
+    const eventsArray = Object.values(currentEvents) //converting the object into an array
+    const validEvents = eventsArray.filter(event => event.title && event.details);
+
+    const match = validEvents.filter(event => 
+      event.title.toLowerCase().includes(searchValues) || event.details.toLowerCase().includes(searchValues)
+    );
+  
+    if(match.length > 0){
+      return setFilteredEvents(match);
+    } else {
+      window.alert("no event matches found");
+    }
+
+  }
 
 
   //We are fetching the data that is at the url /api which at the backend is connection to the eventonica datbase
@@ -119,9 +156,25 @@ function App() {
       ) : (
         <>
 
-          <NavBar 
+          <NavBar
+            filterSubmit={filterSubmit} 
+            handleFilterChange={handleFilterChange}
+            filterText={filterText}
+            
           />
             <p colSpan="6" style={{ textAlign: "center" }}>{deleteConfirmation}</p>
+            <div>
+              {seraching && filteredEvents.length === 0 && <p>no matches found</p>}
+              {filteredEvents.length > 0 && (
+                <ul>
+                  {filteredEvents.map((event, index) => (
+                    <li key={index}>
+                      {event.title} : {event.details}
+                    </li>
+                  ))}
+                </ul>
+              )} 
+            </div>
 
           <HomePage 
             currentEvents={currentEvents}

@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
-function NavBar(){
-
+function NavBar({filterText, handleFilterChange, filterSubmit }){
 
   return(
     <div className="navbar bg-base-100 shadow-sm">
@@ -11,15 +10,20 @@ function NavBar(){
         <a className="btn btn-ghost text-xl">Eventonica!</a>
       </div>
       <div className="navbar-end">
-      <label className="input">
-        <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></g></svg>
-        <input 
-          type="text" 
-          placeholder="search" 
-          // value={filterText}
-          // onChange={handleFilterChange}
-          />
-      </label>
+        <form onSubmit={filterSubmit}>
+          <label className="input" htmlFor='filterText'>
+            <input 
+              id="filterText"
+              type="text" 
+              name="filterText"
+              placeholder="search" 
+              value={filterText}
+              onChange={(e) => handleFilterChange(e)}
+              />
+          </label>
+          <button className="btn btn-outline btn-primary" >Search</button>
+        </form>
+        
       </div>
     </div>   
   )
