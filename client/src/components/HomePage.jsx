@@ -3,7 +3,7 @@ import { TfiTrash } from "react-icons/tfi";
 import { GrFavorite } from "react-icons/gr";
 import { SlPencil } from "react-icons/sl";
 
-function HomePage({ currentEvents, deleteEvent}){
+function HomePage({ currentEvents, filterEvents, deleteEvent}){
       //I think I can build useReducer on this page when to handle edit event, like event and unlike an event 3 different states
       //that can be managed with 1 use reducer 
   return(

@@ -32,8 +32,8 @@ function App() {
   const [deleteConfirmation, setDeleteConfirmation] = useState("");
   const [addEvent, setAddEvent] = useState(false);
 
-  //We are fetching the data that is at the url /api which at the backend is connection to the eventonica databse
 
+  //We are fetching the data that is at the url /api which at the backend is connection to the eventonica datbase
   const fetchCurrentEvents = async () => { 
     try {
       const res = await fetch("/events");
@@ -119,19 +119,21 @@ function App() {
       ) : (
         <>
 
-          <NavBar />
-          <p colSpan="6" style={{ textAlign: "center" }}>{deleteConfirmation}</p>
+          <NavBar 
+          />
+            <p colSpan="6" style={{ textAlign: "center" }}>{deleteConfirmation}</p>
+
           <HomePage 
-          currentEvents={currentEvents}
-          eventID={currentEvents.id}
-          deleteEvent={deleteEvent}/>
-          <button onClick={() => setAddEvent(true)} className="btn btn-primary">Add event</button>
+            currentEvents={currentEvents}
+            eventID={currentEvents.id}
+            deleteEvent={deleteEvent}/>
+            <button onClick={() => setAddEvent(true)} className="btn btn-primary">Add event</button>
           
           {addEvent && <CreateEvents 
-          closeAddEvent = {() => setAddEvent(false)} 
-          createEvent={createEvent} 
-          newEvent={newEvent}
-          handleChange={handleChange}/>}
+            closeAddEvent = {() => setAddEvent(false)} 
+            createEvent={createEvent} 
+            newEvent={newEvent}
+            handleChange={handleChange}/>}
         </>
       )}
     </div> 
