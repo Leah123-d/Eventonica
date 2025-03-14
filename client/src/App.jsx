@@ -4,26 +4,23 @@ import HomePage from './components/HomePage'
 import NavBar from './components/NavBar'
 import CreateEvents from './components/CreateEvents'
 
+const initialState = {
+  loading: true,
+} 
+
+function reducer(state, action){
+  switch (action.type){
+    case "SET_LOADING":
+      return {...state, loading: action.payload };
+    default:
+      return state;
+  }
+}
+
 function App() {
 
-  // const initialState {
-  //   loading: ture,
-  //   searching: false,
-  //   deleteConfirmation: "",
-  // }
+  const [state, dispatch] = useReducer(reducer,initialState);
 
-
-  // function reducer(state,action):{
-  //   switch (action.type){
-  //     case "SET_LOADING":
-  //       return {...state, loading: action.payload };
-  //     case "SET_SEARCHING":
-  //       return {...state, searching: action.payload };
-  //     case "SET_DELETE_CONFIRMATION":
-  //     return {...state, deleteConfirmation: action.payload };
-      
-  //   }
-  // }
   const [newEvent, setNewEvent] = useState(
     {
       title: "",
@@ -37,8 +34,6 @@ function App() {
   const [addEvent, setAddEvent] = useState(false);
   const [filterText, setFilterText] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
-
-  const [loading, setLoading] = useState(true);
   const [seraching, setSearching] = useState(false)
   const [deleteConfirmation, setDeleteConfirmation] = useState("");
 
@@ -94,10 +89,10 @@ function App() {
 
   useEffect(() => {
     const getEvents = async () => {
-      setLoading(true);
+      dispatch({type: "SET_LOADING", payload:true});
       const events = await fetchCurrentEvents();
       setCurrentEvents(events);
-      setLoading(false);
+      dispatch({type: "SET_LOADING", payload:false});
     };
     getEvents();
   }, []);
@@ -158,7 +153,7 @@ function App() {
 
   return (
     <div className="App">
-      {loading ? (
+      {state.loading ?   (
         <p>Loading events ...</p>
       ) : (
         <>
