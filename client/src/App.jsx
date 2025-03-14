@@ -6,24 +6,24 @@ import CreateEvents from './components/CreateEvents'
 
 function App() {
 
-  const initialState {
-    loading: ture,
-    searching: false,
-    deleteConfirmation: "",
-  }
+  // const initialState {
+  //   loading: ture,
+  //   searching: false,
+  //   deleteConfirmation: "",
+  // }
 
 
-  function reducer(state,action):{
-    switch (action.type){
-      case "SET_LOADING":
-        return {...state, loading: action.payload };
-      case "SET_SEARCHING":
-        return {...state, searching: action.payload };
-      case "SET_DELETE_CONFIRMATION":
-      return {...state, deleteConfirmation: action.payload };
+  // function reducer(state,action):{
+  //   switch (action.type){
+  //     case "SET_LOADING":
+  //       return {...state, loading: action.payload };
+  //     case "SET_SEARCHING":
+  //       return {...state, searching: action.payload };
+  //     case "SET_DELETE_CONFIRMATION":
+  //     return {...state, deleteConfirmation: action.payload };
       
-    }
-  }
+  //   }
+  // }
   const [newEvent, setNewEvent] = useState(
     {
       title: "",
@@ -38,9 +38,9 @@ function App() {
   const [filterText, setFilterText] = useState("");
   const [filteredEvents, setFilteredEvents] = useState([]);
 
-  // const [loading, setLoading] = useState(true);
-  // const [seraching, setSearching] = useState(false)
-  // const [deleteConfirmation, setDeleteConfirmation] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [seraching, setSearching] = useState(false)
+  const [deleteConfirmation, setDeleteConfirmation] = useState("");
 
   const handleFilterChange = (e) => {
     setFilterText(e.target.value); //as the user types we will update the filterText state
