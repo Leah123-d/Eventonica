@@ -42,17 +42,12 @@ npm install express
 `````````
 
 
-### api key setup:
-
-This API does not require an API key. 
-
-
 ### How to run:
 For Backend
 1. cd into the folder server  
-2. In the terminal type ````````` node index.js`````````
+2. In the terminal type ````````` node server.js`````````
 
-To confirm the backend is connection navigate to the URL `````````localhost:3000/api`````````
+To confirm the backend is connection navigate to the URL `````````localhost:3000/events`````````
 
 For Frontend
 1. cd into the folder app-front-end
@@ -60,7 +55,9 @@ For Frontend
 
 
 ## Future Implementation: 
-1. The delete button is a hard delete function and it would nice to create it as a soft deletion with an option to retore the deleted events. 
+1. The delete button is a hard delete function and it would nice to create it as a soft deletion with an option to retore the deleted events.
+2. Create more tests for components
+3. Adds patch http request for favoriting and editing events
 
 
 
