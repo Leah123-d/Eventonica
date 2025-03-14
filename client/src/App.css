@@ -36,8 +36,6 @@
     --noise: 0;
   }
 
-  @media (max-width: 412) {
-    .nav-start{
-      display: none;
-    }
+  tr:hover {
+    background: #4b69ff30;
   }

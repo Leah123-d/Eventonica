@@ -21,16 +21,16 @@ const router = express.Router();
 router.post('/', async (req,res) => {
     try{
     console.log('POST ROUTE REACHED');
-    const { id, title, details, venue, extras } = req.body;
+    const {title, details, venue, extras } = req.body;
 
     const result = await dbConnection.query(
-        'INSERT INTO events (id, title, details, venue, extras) VALUES ($1, $2, $3, $4, $5) RETURNING *',
-        [id, title, details, venue, extras]
+        'INSERT INTO events (title, details, venue, extras) VALUES ($1, $2, $3, $4) RETURNING *',
+        [title, details, venue, extras]
     );
     console.log(result);
     //using parameterized quries to prevent SQL injection
 
-    res.send(`Event ${result.rows[0].title} was added to the database`)
+    res.json({ message:`Event ${result.rows[0].title} was added with ID ${result.rows[0].id}`})
     } catch (error) {
         console.error('Error creating new event: ', error);
     }
