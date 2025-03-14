@@ -1,7 +1,7 @@
 import { useState, useReducer, useEffect } from 'react'
 import './App.css'
 import HomePage from './components/HomePage'
-// import NavBar from './components/NavBar'
+import NavBar from './components/NavBar'
 import CreateEvents from './components/CreateEvents'
 
 //TO-DO: 
@@ -29,7 +29,9 @@ function App() {
     });
   const [errorHandle, setErrorHandle] = useState(false);
   const [loading, setLoading] = useState(true);
-  const[currentEvents, setCurrentEvents] = useState([]);
+  const [currentEvents, setCurrentEvents] = useState([]);
+  const [deleteConfirmation, setDeleteConfirmation] = useState("");
+  const [addEvent, setAddEvent] = useState(false);
 
   //We are fetching the data that is at the url /api which at the backend is connection to the eventonica databse
 
@@ -78,6 +80,7 @@ function App() {
     // const data = await response.json();
     // console.log("fetched data:", data);
     // setNewEvent(data); //storing the database response
+    // setAddEvent(false); // to close the event form after submitted an event
     // if(data.response_code != 0){
     //   console.log("no results found");
     //   // setErrorHandle(true); //will come back to setting this error handling depending on response from the backend
@@ -94,13 +97,12 @@ function App() {
         if(!response.ok){
           throw new Error('something went wrong')
         }
-        //can add a navigate to force back to the main page 
-        //assume things went well
-        console.log("event deletion successful!")
         setCurrentEvents((prevEvents) => prevEvents.filter(event => event.id !== id));
+        setDeleteConfirmation("Event successfully deleted!");
       }
       catch(error) {
         console.log(error);
+        //handle error state here too
       }
   }
 
@@ -108,17 +110,21 @@ function App() {
     <div className="App">
       {loading ? (
         <p>Loading events ...</p>
-
       ) : (
         <>
-          {/* <NavBar /> */}
+
+          <NavBar />
+          <p colSpan="6" style={{ textAlign: "center" }}>{deleteConfirmation}</p>
           <HomePage 
           currentEvents={currentEvents}
           eventID={currentEvents.id}
           deleteEvent={deleteEvent}/>
-          <CreateEvents 
+          <button onClick={() => setAddEvent(true)} className="btn btn-primary">Add event</button>
+          
+          {addEvent && <CreateEvents 
+          closeAddEvent = {() => setAddEvent(false)} 
           createEvent={createEvent} 
-          handleChange={handleChange}/> 
+          handleChange={handleChange}/>}
         </>
       )}
     </div> 

@@ -68,7 +68,7 @@ INSERT INTO events (id, title, details, venue, extras)
 VALUES 
     (1, 'Princess GAGA: The MAYHEM EXPERIENCE!', 'A DISCO-POP DANCE PARTY + IMMERSIVE DRAG SPECTACULAR!', 'OASIS', NULL),
     (2, 'AI Dev 25 - The AI Developer Conference', 'Celebrate Pi Day with us! Join us for a day of coding, learning, and connecting to build AI applications with your fellow developers!', 'Shack15', NULL),
-    (3, 'BikeandBrew', 'meet at a park and bike around the city. All levels welcome!', 'Persidio', NULL),
+    (3, 'BikeandBrew', 'meet at a park and bike around the city. All levels welcome!', 'Presidio', NULL),
     (4, 'Indie BYOG Showcase', 'The 3rd annual Indie BYOG showcase! Join us for a chill night of indie game demos & networking ', 'BuzzWorks', NULL),
     (5, 'Code Meets Culture: Engineering the Next Generation of Inclusive Tech', 'Join us for an impactful, multi-session workshop that addresses the critical intersection of culture and technology.', 'online', NULL);
 

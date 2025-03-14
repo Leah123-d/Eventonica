@@ -1,7 +1,8 @@
-function CreateEvent({ createEvent, handleChange }){
-    //I think I can build usereducer on this page when events are edited
+function CreateEvent({ createEvent, handleChange, closeAddEvent }){
+
   return(
-    <div className="card w-96 bg-base-100 shadow-sm">
+    <div className="card w-96 bg-base-100 shadow-sm" onClick={(e) => {
+      if(e.target.className === 'card')closeAddEvent()}}>
       <div className="card-body">
         <div className="flex justify-between">
           <h2 className="text-3xl font-bold">Creat your Event!</h2>
@@ -26,8 +27,6 @@ function CreateEvent({ createEvent, handleChange }){
       </div>
       </div>
     </div>
-    
-
   )
 
 }

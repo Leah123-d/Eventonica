@@ -1,10 +1,11 @@
+import { useReducer, useState } from 'react'
 import { TfiTrash } from "react-icons/tfi";
 import { GrFavorite } from "react-icons/gr";
+import { SlPencil } from "react-icons/sl";
 
-function HomePage({ currentEvents, deleteEvent }){
-
-  console.log({ currentEvents });
-  
+function HomePage({ currentEvents, deleteEvent}){
+      //I think I can build useReducer on this page when to handle edit event, like event and unlike an event 3 different states
+      //that can be managed with 1 use reducer 
   return(
     <div className="overflow-x-auto">
       <table className="table">
@@ -16,6 +17,7 @@ function HomePage({ currentEvents, deleteEvent }){
           <th>Description</th>
           <th>Venue</th>
           <th>Additional details</th>
+          <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -27,7 +29,8 @@ function HomePage({ currentEvents, deleteEvent }){
               <td>{event.details}</td>
               <td>{event.venue}</td>
               <td>{event.extras}</td>
-              <td><button onClick={() => deleteEvent(event.id)}><TfiTrash /></button></td>
+              <td><button><SlPencil /></button></td>
+              <td><button onClick={() => deleteEvent(event.id)} ><TfiTrash /></button></td>
               <td><button><GrFavorite /></button></td>
               </tr>
             ))
@@ -38,7 +41,6 @@ function HomePage({ currentEvents, deleteEvent }){
             </td>
             </tr>
             )}
-
         </tbody>
       </table>
     </div>
