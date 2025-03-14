@@ -68,9 +68,7 @@ function App() {
     } else {
       window.alert("no event matches found");
     }
-
   }
-
 
   //We are fetching the data that is at the url /api which at the backend is connection to the eventonica datbase
   const fetchCurrentEvents = async () => { 
@@ -104,7 +102,8 @@ function App() {
       [name]: value
     }));
   };
-    //with create event we will have an onsubit that is doing somethign with the data
+  
+  //with create event we will have an onsubmit that is doing somethign with the data
   const createEvent = async (e) => {
     e.preventDefault();
     console.log("create event function connected!")
