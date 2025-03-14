@@ -60,6 +60,7 @@ For Frontend
 
 
 ## Future Implementation: 
+1. The delete button is a hard delete function and it would nice to create it as a soft deletion with an option to retore the deleted events. 
 
 
 
