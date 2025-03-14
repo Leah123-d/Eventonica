@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import router from './routes/events.js';
 const app = express();
+dotenv.config();
 
 //TO-DO:
 //need to get my data from my database displaying when the url /events is called
@@ -10,12 +11,9 @@ const app = express();
 //test if CRUD operations are function from the backend then see how to connect that to the front end
 //routes are in a different file for seperation of concerns 
 
-dotenv.config();
 
-app.use(bodyParser.json()) //Middleware to parse JSON
-// app.use('/animales', animalRoutes); 
-// all our routes are in a different file, 
-// when the requests are sent to our server the correct information/ actions will be taken
+
+app.use(bodyParser.json()) 
 
 //to read the events
 app.use('/events', router); 
