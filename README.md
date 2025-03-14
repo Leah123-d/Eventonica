@@ -58,6 +58,8 @@ For Frontend
 1. The delete button is a hard delete function and it would nice to create it as a soft deletion with an option to retore the deleted events.
 2. Create more tests for components
 3. Adds patch http request for favoriting and editing events
+4. Make table dynamically render when a new event is added versus refreshing the page
+5. Refactor the project so the back end is handling more processing versus the front end
 
 
 
