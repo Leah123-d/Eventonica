@@ -50,7 +50,7 @@ For Backend
 To confirm the backend is connection navigate to the URL `````````localhost:3000/events`````````
 
 For Frontend
-1. cd into the folder app-front-end
+1. cd into the folder client
 2. In the terminal type ````````` npm run dev `````````
 
 
