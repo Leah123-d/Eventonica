@@ -1,6 +1,6 @@
 # Welcome to Eventonica! 
 
-I made this project to practice how to working with CRUD operations and connection the user's input to modify a database.
+I made this project to practice working with CRUD operations and connection the user's input to modify a database.
 
 ## Project Objective:
 
